@@ -1,0 +1,16 @@
+<section>
+    <div class="links-renderer-heading" >
+        <label>sort by</label>
+        <md-button-toggle-group [(ngModel)]='sortOrder'>
+            <md-button-toggle value="date" checked>
+                <md-icon>date_range</md-icon>
+            </md-button-toggle>
+            <md-button-toggle value="unread">
+                <md-icon>update</md-icon>
+            </md-button-toggle>
+        </md-button-toggle-group>
+    </div>
+
+    <links-group *ngFor="let title of linkGroupTitles" [title]="title">
+    </links-group>
+</section>

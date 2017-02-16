@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "assets/css/normalize.css";
+
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
+body {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: rgb(243, 243, 243);
+}

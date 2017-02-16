@@ -1,0 +1,12 @@
+.link-group {
+    margin: 20px auto;
+}
+.link-group h4 {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    padding-bottom: 20px;
+    font-size: 18.4px;
+    font-weight: 100;
+    border-bottom: rgb(239, 234, 232) solid 1px;
+}

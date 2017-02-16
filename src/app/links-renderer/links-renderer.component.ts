@@ -10,10 +10,16 @@ export class LinksRendererComponent implements OnInit {
     sortOrder: string;
 
     constructor() {
-        this.sortOrder = 'date';
-        this.linkGroupTitles = ['today', 'yesterday', 'This week', 'Last Week', 'February 2017', 'January 2017', 'Older'];
+        this.sortOrder = 'unread';
     }
 
     ngOnInit() { }
 
+    onSortChange() {
+        if (this.sortOrder === 'date') {
+            this.linkGroupTitles = ['today', 'yesterday', 'This week', 'Last Week', 'February 2017', 'January 2017', 'Older'];
+        } else {
+            this.linkGroupTitles = ['Unread updates', 'Visited'];
+        }
+    }
 }

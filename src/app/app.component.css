@@ -1,4 +1,5 @@
 .app-main {
     max-width: 800px;
+    padding: 0 5px;
     margin: 50px auto;
 }

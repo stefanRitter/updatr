@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { UpdatrLink }        from '../updatr-link/updatr-link';
-import { UpdatrLinkService } from '../updatr-link/updatr-link.service';
+import { UpdatrLinkGroup }   from '../updatr-link/updatr-link-group';
 
 @Component({
     selector: 'links-group',
@@ -10,7 +10,7 @@ import { UpdatrLinkService } from '../updatr-link/updatr-link.service';
 })
 
 export class LinksGroupComponent implements OnInit {
-    @Input()  title: string;
+    @Input()  group: UpdatrLinkGroup;
 
     constructor() { }
 

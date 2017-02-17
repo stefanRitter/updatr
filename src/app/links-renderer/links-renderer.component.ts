@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UpdatrLinkService } from '../updatr-link/updatr-link.service';
+import { UpdatrLinkGroup }   from '../updatr-link/updatr-link-group';
+
 @Component({
     selector: 'links-renderer',
+    providers: [UpdatrLinkService],
     templateUrl: './links-renderer.component.html',
     styleUrls: ['./links-renderer.component.css']
 })
 export class LinksRendererComponent implements OnInit {
-    linkGroupTitles: string[];
+    updatrLinkService: UpdatrLinkService;
+    linkGroups: UpdatrLinkGroup[];
     sortOrder: string;
 
-    constructor() {
+    constructor(updatrLinkService: UpdatrLinkService) {
+        this.updatrLinkService = updatrLinkService;
         this.sortOrder = 'unread';
     }
 
@@ -17,9 +23,9 @@ export class LinksRendererComponent implements OnInit {
 
     onSortChange() {
         if (this.sortOrder === 'date') {
-            this.linkGroupTitles = ['today', 'yesterday', 'This week', 'Last Week', 'February 2017', 'January 2017', 'Older'];
+            this.linkGroups = this.updatrLinkService.getDateUpdatedGroups();
         } else {
-            this.linkGroupTitles = ['Unread updates', 'Visited'];
+            this.linkGroups = this.updatrLinkService.getUnreadReadGroups();
         }
     }
 }

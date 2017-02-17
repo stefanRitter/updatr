@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { UpdatrLink }        from '../updatr-link/updatr-link';
 import { UpdatrLinkGroup }   from '../updatr-link/updatr-link-group';
 
 @Component({

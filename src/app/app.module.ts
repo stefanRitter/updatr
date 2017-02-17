@@ -9,6 +9,7 @@ import { AppHeaderComponent } from './app-header/app-header.component';
 import { LinkAdderComponent } from './link-adder/link-adder.component';
 import { LinksRendererComponent } from './links-renderer/links-renderer.component';
 import { LinksGroupComponent } from './links-group/links-group.component';
+import { LinkRendererComponent } from './link-renderer/link-renderer.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LinksGroupComponent } from './links-group/links-group.component';
     LinkAdderComponent,
     LinksRendererComponent,
     LinksGroupComponent,
+    LinkRendererComponent,
   ],
   imports: [
     BrowserModule,

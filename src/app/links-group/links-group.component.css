@@ -1,5 +1,6 @@
 .link-group {
     margin: 20px auto;
+    padding: 24px 0 0 0;
 }
 
 .link-group h4 {
@@ -9,5 +10,6 @@
     padding-bottom: 20px;
     font-size: 18.4px;
     font-weight: 100;
+    margin: 0;
     border-bottom: rgb(239, 234, 232) solid 1px;
 }

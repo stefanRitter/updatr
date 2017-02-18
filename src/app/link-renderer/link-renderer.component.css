@@ -1,0 +1,11 @@
+.link-renderer {
+    padding: 30px;
+    border-bottom: 1px solid rgb(239, 234, 232);
+}
+.link-renderer a {
+    color: Black;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+    text-decoration: none;
+}

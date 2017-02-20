@@ -1,4 +1,10 @@
 <div class="link-renderer">
-    <a href="{{link.url}}" target="_blank">{{link.url}}</a>
-
+    <a href="{{link.url}}" (click)="onToggleRead()" target="_blank">
+        <md-icon *ngIf="!link.visited">new_releases</md-icon>
+        {{link.url}}
+    </a>
+    <div class="link-renderer-buttons">
+        <md-icon (click)="onToggleRead()">remove_red_eye</md-icon>
+        <md-icon (click)="onDelete()">delete</md-icon>
+    </div>
 </div>

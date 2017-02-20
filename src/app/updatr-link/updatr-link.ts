@@ -1,14 +1,15 @@
 export class UpdatrLink {
-    url: string;
-    title: string;
-    lastModified: Date;
+    url:string;
+    title:string;
+    html:string;
     visited:boolean = false;
-    lastChecked: Date;
+    loading:boolean = true;
+    lastModified:string;
+    lastChecked:Date;
 
     constructor(url: string) {
         this.url = url;
         this.title = url;
-        this.lastModified = new Date();
         this.lastChecked = new Date();
     }
 }

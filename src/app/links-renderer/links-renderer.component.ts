@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 
 import { UpdatrLinkService } from '../updatr-link/updatr-link.service';
 import { UpdatrLinkGroup }   from '../updatr-link/updatr-link-group';
@@ -9,7 +9,7 @@ import { UpdatrLinkGroup }   from '../updatr-link/updatr-link-group';
     templateUrl: './links-renderer.component.html',
     styleUrls: ['./links-renderer.component.css']
 })
-export class LinksRendererComponent implements OnInit {
+export class LinksRendererComponent implements OnInit, DoCheck {
     updatrLinkService: UpdatrLinkService;
     linkGroups: UpdatrLinkGroup[];
     sortOrder: string;
@@ -20,6 +20,8 @@ export class LinksRendererComponent implements OnInit {
     }
 
     ngOnInit() { }
+
+    ngDoCheck() { this.onSortChange(); }
 
     onSortChange() {
         if (this.sortOrder === 'date') {

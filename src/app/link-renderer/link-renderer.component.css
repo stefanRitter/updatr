@@ -1,6 +1,7 @@
 .link-renderer {
-    padding: 30px;
+    padding: 30px 15px 30px 30px;
     border-bottom: 1px solid rgb(239, 234, 232);
+    overflow: hidden;
 }
 .link-renderer a {
     color: Black;
@@ -8,4 +9,13 @@
     cursor: pointer;
     font-size: 20px;
     text-decoration: none;
+    float: left;
+}
+.link-renderer a md-icon {
+    color: green;
+}
+.link-renderer-buttons {
+    float: right;
+    cursor: pointer;
+    color: darkgray;
 }

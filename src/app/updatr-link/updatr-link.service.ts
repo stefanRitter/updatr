@@ -1,48 +1,94 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ApplicationRef } from '@angular/core';
+import { Headers, RequestOptions, Http } from '@angular/http';
+
 import { UpdatrLink } from './updatr-link';
 import { UpdatrLinkGroup } from './updatr-link-group';
 
 
 @Injectable()
 export class UpdatrLinkService {
-    links: UpdatrLink[];
-    unread: UpdatrLinkGroup;
-    read: UpdatrLinkGroup;
+    private http: Http;
+    private applicationRef: ApplicationRef;
 
-    constructor() {
-        if (!localStorage['updatr_links_store']) {
-            localStorage['updatr_links_store'] = JSON.stringify([]);
-        }
-        this.links = JSON.parse(localStorage['updatr_links_store']);
-        this.unread = new UpdatrLinkGroup();
-        this.unread.title = 'Unread updates';
-        this.read = new UpdatrLinkGroup();
-        this.read.title = 'Visited';
+    constructor(applicationRef: ApplicationRef, http: Http) {
+        this.applicationRef = applicationRef;
+        this.http = http;
     }
 
     addUrl(url: string) {
+        let links = this.getData();
+
         // don't allow dups
         let uniq = true;
-        this.links.forEach(function (link:UpdatrLink) { if (link.url === url) uniq = false; });
+        links.forEach(function (link:UpdatrLink) { if (link.url === url) uniq = false; });
         if (!uniq) return;
 
         // persist new link
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
         let newLink = new UpdatrLink(url);
-        this.links.push(newLink);
-        localStorage['updatr_links_store'] = JSON.stringify(this.links);
 
-        // update sorting
-        this.getUnreadReadGroups();
+        this.http.get(url, options)
+            .subscribe(
+                response => this.handleResponse(response, links, newLink),
+                error => this.handleError(error)
+            );
+
+        links.push(newLink);
+        localStorage['updatr_links_store'] = JSON.stringify(links);
+
+        // re-render
+        this.applicationRef.tick();
+    }
+
+    removeUrl(url: string) {
+        let links = this.getData();
+
+        // find url
+        let index = -1;
+        links.forEach(function (link:UpdatrLink, i:number) { if (link.url === url) index = i; });
+        if (index === -1) return;
+
+        // remove & persist
+        links.splice(index, 1);
+        localStorage['updatr_links_store'] = JSON.stringify(links);
+
+        // re-render
+        this.applicationRef.tick();
+    }
+
+    toggleReadUrl(url: string) {
+        let links = this.getData();
+
+        // find url
+        let index = -1;
+        links.forEach(function (link:UpdatrLink, i:number) { if (link.url === url) index = i; });
+        if (index === -1) return;
+
+        // udpate & persist
+        links[index].visited = !links[index].visited;
+        localStorage['updatr_links_store'] = JSON.stringify(links);
+
+        // re-render
+        this.applicationRef.tick();
     }
 
     getUnreadReadGroups() {
-        this.unread.links = this.links.filter(function (link: UpdatrLink) {
+        let links = this.getData();
+
+        let unread = new UpdatrLinkGroup();
+        unread.title = 'Unread updates';
+        let read = new UpdatrLinkGroup();
+        read.title = 'Visited';
+
+        unread.links = links.filter(function (link: UpdatrLink) {
             return !link.visited;
         });
-        this.read.links = this.links.filter(function (link: UpdatrLink) {
+        read.links = links.filter(function (link: UpdatrLink) {
             return link.visited;
         });
-        return [this.unread, this.read];
+
+        return [unread, read];
     }
 
     getDateUpdatedGroups() {
@@ -60,4 +106,18 @@ export class UpdatrLinkService {
         return [today, yesterday, week, month, older];
     }
 
+    private getData() {
+        if (!localStorage['updatr_links_store']) {
+            localStorage['updatr_links_store'] = JSON.stringify([]);
+        }
+        return JSON.parse(localStorage['updatr_links_store']);
+    }
+
+    private handleError(err: Error) {
+        console.error('HTTP ERROR', err);
+    }
+
+    private handleResponse(response, links, newLink) {
+        console.log(response);
+    }
 }

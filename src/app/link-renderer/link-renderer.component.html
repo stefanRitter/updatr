@@ -1,7 +1,12 @@
-<div class="link-renderer">
-    <a href="{{link.url}}" (click)="onToggleRead()" target="_blank">
-        <md-icon *ngIf="!link.visited">new_releases</md-icon>
-        {{link.url}}
+<div class="link-renderer" [ngClass]="{'updated': !link.visited }">
+    <a href="#" *ngIf="link.loading">
+        <md-icon>cloud_download</md-icon>
+        <em>loading: {{link.url}}</em>
+    </a>
+
+    <a href="{{link.url}}" (click)="onToggleRead()" *ngIf="!link.loading" target="_blank">
+        <md-icon class="update-icon">new_releases</md-icon>
+        <span class="link-text">{{link.url}}</span>
     </a>
     <div class="link-renderer-buttons">
         <md-icon (click)="onToggleRead()">remove_red_eye</md-icon>

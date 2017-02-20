@@ -1,16 +1,11 @@
 <section>
     <div class="links-renderer-heading" >
-        <label>sort by</label>
-        <md-button-toggle-group [(ngModel)]='sortOrder' (change)="onSortChange()">
-            <md-button-toggle mdTooltip="dates updated" mdTooltipPosition="below" value="date" checked>
-                <md-icon>date_range</md-icon>
-            </md-button-toggle>
-            <md-button-toggle mdTooltip="last visited" mdTooltipPosition="below" value="unread">
-                <md-icon>update</md-icon>
-            </md-button-toggle>
-        </md-button-toggle-group>
+        <md-icon (click)="onUpdate()"
+                  mdTooltip="check for updates"
+                  mdTooltipPosition="below">
+            autorenew
+        </md-icon>
     </div>
 
-    <links-group *ngFor="let group of linkGroups" [group]="group">
-    </links-group>
+    <links-group *ngFor="let group of linkGroups" [group]="group"></links-group>
 </section>

@@ -1,7 +1,11 @@
 .links-renderer-heading {
-    text-align: right;
+    text-align: center;
     color: darkgray;
     margin-top: 40px;
+}
+.links-renderer-heading md-icon {
+    cursor: pointer;
+    font-size: 35px;
 }
 
 .links-renderer-heading label {

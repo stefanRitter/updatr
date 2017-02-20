@@ -16,18 +16,15 @@ export class LinksRendererComponent implements OnInit, DoCheck {
 
     constructor(updatrLinkService: UpdatrLinkService) {
         this.updatrLinkService = updatrLinkService;
-        this.sortOrder = 'unread';
     }
 
     ngOnInit() { }
 
-    ngDoCheck() { this.onSortChange(); }
+    ngDoCheck() {
+        this.linkGroups = this.updatrLinkService.getUnreadReadGroups();
+    }
 
-    onSortChange() {
-        if (this.sortOrder === 'date') {
-            this.linkGroups = this.updatrLinkService.getDateUpdatedGroups();
-        } else {
-            this.linkGroups = this.updatrLinkService.getUnreadReadGroups();
-        }
+    onUpdate() {
+        this.updatrLinkService.updateAllLinks();
     }
 }

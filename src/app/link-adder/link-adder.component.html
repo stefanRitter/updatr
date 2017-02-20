@@ -1,10 +1,15 @@
-<md-card>
+<md-card style="padding: 6px 24px;">
     <md-card-content>
         <form (ngSubmit)="onSubmit()">
             <md-input-container class="link-adder-container">
                 <input md-input [(ngModel)]='newLink' name="newURL" type="url" placeholder="Add a new link to watch">
             </md-input-container>
-            <button md-fab type="submit"><md-icon>add</md-icon></button>
+            <button md-raised-button
+                    mdTooltip="add link to Updatr"
+                    mdTooltipPosition="below"
+                    type="submit" class="link-adder-button">
+                <md-icon>add</md-icon>
+            </button>
         </form>
     </md-card-content>
 </md-card>

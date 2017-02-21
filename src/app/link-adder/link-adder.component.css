@@ -1,15 +1,61 @@
 .link-adder {
     box-shadow: 0 0 0 -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.14), 0 0 3px 0 rgba(0,0,0,.12);
-    padding: 6px 24px;
+    padding: 6px 15px 6px 22px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
+    overflow: hidden;
 }
 .link-adder-container {
-    width: calc(100% - 65px);
+    width: calc(100% - 45px);
+    border: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    float:left;
 }
+.link-adder-container input {
+    border: 0;
+    border-bottom: 1px solid darkgray;
+    outline: 0;
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 12px;
+    font-size: 18px;
+}
+.link-adder-container label {
+    font-size: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: darkgray;
+}
+
 .link-adder-button {
-    min-width: 0;
-    margin-left: 5px;
+    float:right;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: 0;
+    border: 0;
+    background: transparent;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: middle;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-weight: 500;
+    color: currentColor;
+    text-align: center;
+    margin: 0;
+    padding: 2px 0 0;
+    border-radius: 2px;
+    margin-left: 6px;
+}
+.link-adder-button i {
+    font-size: 35px;
 }

@@ -12,7 +12,6 @@ import { UpdatrLinkGroup }   from '../updatr-link/updatr-link-group';
 export class LinksRendererComponent implements OnInit, DoCheck {
     updatrLinkService: UpdatrLinkService;
     linkGroups: UpdatrLinkGroup[];
-    sortOrder: string;
 
     constructor(updatrLinkService: UpdatrLinkService) {
         this.updatrLinkService = updatrLinkService;
@@ -22,9 +21,5 @@ export class LinksRendererComponent implements OnInit, DoCheck {
 
     ngDoCheck() {
         this.linkGroups = this.updatrLinkService.getUnreadReadGroups();
-    }
-
-    onUpdate() {
-        this.updatrLinkService.updateAllLinks();
     }
 }

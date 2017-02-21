@@ -1,13 +1,13 @@
 <div class="card link-adder">
     <form (ngSubmit)="onSubmit()">
-        <md-input-container class="link-adder-container">
-            <input md-input [(ngModel)]='newLink' name="newURL" type="url" placeholder="Add a new link to watch">
-        </md-input-container>
-        <button md-raised-button
-                mdTooltip="add link to Updatr"
-                mdTooltipPosition="below"
-                type="submit" class="link-adder-button">
-            <i class="material-icons">add</i>
+
+        <fieldset class="link-adder-container">
+            <label for="newUrl">Add a new link</label>
+            <input [(ngModel)]='newLink' name="newURL" type="url">
+        </fieldset>
+
+        <button type="submit" class="link-adder-button">
+            <i class="material-icons">add_box</i>
         </button>
     </form>
 </div>

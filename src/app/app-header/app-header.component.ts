@@ -1,15 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UpdatrLinkService } from '../updatr-link/updatr-link.service';
+
 @Component({
-  selector: 'app-header',
-  templateUrl: './app-header.component.html',
-  styleUrls: ['./app-header.component.css']
+    selector: 'app-header',
+    providers: [UpdatrLinkService],
+    templateUrl: './app-header.component.html',
+    styleUrls: ['./app-header.component.css']
 })
 
 export class AppHeaderComponent implements OnInit {
 
-  constructor() { }
+    updatrLinkService: UpdatrLinkService;
 
-  ngOnInit() { }
+    constructor(updatrLinkService: UpdatrLinkService) {
+        this.updatrLinkService = updatrLinkService;
+    }
 
+    ngOnInit() { }
+
+    onUpdate() {
+        this.updatrLinkService.updateAllLinks();
+    }
 }

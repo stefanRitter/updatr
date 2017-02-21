@@ -1,12 +1,3 @@
 <section>
-    <div class="links-renderer-heading" >
-        <i class="material-icons"
-            (click)="onUpdate()"
-            mdTooltip="check for updates"
-            mdTooltipPosition="below">
-            autorenew
-        </i>
-    </div>
-
     <links-group *ngFor="let group of linkGroups" [group]="group"></links-group>
 </section>

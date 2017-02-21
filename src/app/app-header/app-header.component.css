@@ -11,15 +11,33 @@
     text-align: center;
 }
 
-.app-header-logo {
-    height: 30px;
-    display: inline-block;
-}
-
 .app-header-title {
-    margin: 0;
     padding: 0;
+    margin: 3px;
     font-size: 20px;
     letter-spacing: -1px;
     display: inline-block;
+}
+
+.app-header-logo {
+    height: 30px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.app-header-add, .app-header-update {
+    cursor: pointer;
+    font-size: 50px;
+    vertical-align: middle;
+    position: absolute;
+    top: 0;
+}
+.app-header-add {
+    left: 0;
+}
+.app-header-update {
+    font-size: 40px;
+    vertical-align: middle;
+    padding: 5px;
+    right: 0;
 }

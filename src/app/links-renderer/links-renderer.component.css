@@ -3,7 +3,7 @@
     color: darkgray;
     margin-top: 40px;
 }
-.links-renderer-heading md-icon {
+.links-renderer-heading i {
     cursor: pointer;
     font-size: 35px;
 }

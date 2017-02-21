@@ -1,7 +1,7 @@
-<md-card class="link-group">
+<div class="card link-group">
   <h4>{{group.title}}</h4>
-  <md-card-content>
+  <div>
     <link-renderer *ngFor="let link of group.links" [link]="link">
     </link-renderer>
-  </md-card-content>
-</md-card>
+</div>
+</div>

@@ -1,15 +1,15 @@
 <div class="link-renderer" [ngClass]="{'updated': !link.visited }">
     <a href="#" *ngIf="link.loading">
-        <i class="material-icons">cloud_download</i>
-        <em>loading: {{link.url}}</em>
+        <i class="icons loading-icon">cloud_download</i>
+        <em>{{link.url}}</em>
     </a>
 
     <a href="{{link.url}}" (click)="onToggleRead()" *ngIf="!link.loading" target="_blank">
-        <i class="material-icons update-icon">new_releases</i>
+        <i class="icons update-icon">new_releases</i>
         <span class="link-text">{{link.url}}</span>
     </a>
     <div class="link-renderer-buttons">
-        <i class="material-icons" (click)="onToggleRead()">remove_red_eye</i>
-        <i class="material-icons" (click)="onDelete()">delete</i>
+        <i class="icons" (click)="onToggleRead()">remove_red_eye</i>
+        <i class="icons" (click)="onDelete()">delete</i>
     </div>
 </div>

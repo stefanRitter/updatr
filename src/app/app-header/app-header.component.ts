@@ -10,7 +10,7 @@ import { UpdatrLinkService } from '../updatr-link/updatr-link.service';
 })
 
 export class AppHeaderComponent implements OnInit {
-
+    showAdder:boolean = false;
     updatrLinkService: UpdatrLinkService;
 
     constructor(updatrLinkService: UpdatrLinkService) {
@@ -21,5 +21,9 @@ export class AppHeaderComponent implements OnInit {
 
     onUpdate() {
         this.updatrLinkService.updateAllLinks();
+    }
+
+    onAdd() {
+        this.showAdder = !this.showAdder;
     }
 }

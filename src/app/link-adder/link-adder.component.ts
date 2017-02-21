@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
 import { UpdatrLinkService } from '../updatr-link/updatr-link.service';
+
 
 @Component({
     selector: 'link-adder',
@@ -10,6 +12,8 @@ import { UpdatrLinkService } from '../updatr-link/updatr-link.service';
 export class LinkAdderComponent implements OnInit {
     updatrLinkService: UpdatrLinkService;
     newLink: string;
+
+    @Input()  show: boolean;
 
     constructor(updatrLinkService: UpdatrLinkService) {
         this.updatrLinkService = updatrLinkService;

@@ -5,21 +5,29 @@
     right: 0;
     z-index: 1000;
     height: 40px;
-    padding: 5px 0;
-    background: #f36c3d;
     color: white;
-    text-align: center;
 }
 
 .app-header-title {
-    padding: 0;
-    margin: 3px;
+    padding: 10px 0;
+    margin: 0;
     font-size: 20px;
     letter-spacing: -1px;
-    display: inline-block;
+    text-align: center;
+    background: #f36c3d;
+    position: relative;
+    z-index: 10;
+    user-select: none;
+}
+@media (max-width:549px) {
+    .app-header-title {
+        text-align: left;
+    }
 }
 
 .app-header-logo {
+    padding-left: 10px;
+    margin-top: -2px;
     height: 30px;
     display: inline-block;
     vertical-align: bottom;
@@ -33,11 +41,18 @@
     top: 0;
 }
 .app-header-add {
-    left: 0;
+    right: 57px;
+    padding: 0 6px;
+    transition: transform 0.1s ease-in-out;
+    transform: rotateZ(0);
+}
+.app-header-add.show {
+    transform: rotateZ(45deg);
 }
 .app-header-update {
+    border-left: 1px solid white;
     font-size: 40px;
     vertical-align: middle;
-    padding: 5px;
+    padding: 5px 8px;
     right: 0;
 }

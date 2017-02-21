@@ -6,7 +6,16 @@
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
     overflow: hidden;
+    margin: auto;
+    max-width: 800px;
+    transform: translateY(-60px);
+    transition: transform 0.1s ease-in-out;
+    will-change: transform;
 }
+.link-adder.show {
+    transform: translateY(-1px);
+}
+
 .link-adder-container {
     width: calc(100% - 45px);
     border: 0;

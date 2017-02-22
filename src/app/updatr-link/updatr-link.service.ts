@@ -49,7 +49,7 @@ export class UpdatrLinkService {
         this.persistLinks(links);
     }
 
-    toggleReadUrl(url: string) {
+    toggleStarUrl(url: string) {
         let links = this.getData();
 
         // find url
@@ -57,7 +57,9 @@ export class UpdatrLinkService {
         if (index === -1) return;
 
         // udpate & persist
-        links[index].visited = !links[index].visited;
+        links[index].stars = parseInt(links[index].stars,10) + 1;
+        if(links[index].stars > 2) links[index].stars = 0;
+        console.log(links[index].stars);
         this.persistLinks(links);
     }
 
@@ -92,13 +94,27 @@ export class UpdatrLinkService {
     }
 
     updateAllLinks() {
-        alert('update');
+        var links = this.getData();
+        var headers = new Headers({ 'Content-Type': 'application/json' });
+        var options = new RequestOptions({ headers: headers });
+
+        links.forEach((link:UpdatrLink) => {
+            this.http.get(link.url, options)
+                .subscribe(
+                    response => this.handleResponse(response, link),
+                    error => this.handleError(error)
+                );
+        });
     }
 
     private handleResponse(response, newLink) {
         if (response.status === 200) {
-            newLink.html = response._body;
             newLink.loading = false;
+            if (newLink.html !== response._body) {
+                newLink.html = response._body;
+                newLink.updatedOn = (new Date()).toString();
+                newLink.visited = false;
+            }
             this.updateLink(newLink);
         } else {
             this.handleError(response);

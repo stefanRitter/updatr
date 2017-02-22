@@ -26,7 +26,7 @@ export class LinkRendererComponent implements OnInit {
         }
     }
 
-    onToggleRead() {
-        this.updatrLinkService.toggleReadUrl(this.link.url);
+    onToggleStar() {
+        this.updatrLinkService.toggleStarUrl(this.link.url);
     }
 }

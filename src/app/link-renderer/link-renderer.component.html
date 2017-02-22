@@ -4,7 +4,7 @@
         <em>{{link.url}}</em>
     </a>
 
-    <a href="{{link.url}}" *ngIf="!link.loading" target="_blank">
+    <a href="{{link.url}}" (click)="onToggleRead()" *ngIf="!link.loading" target="_blank">
         <i class="icons update-icon">new_releases</i>
         <span class="link-text">{{link.url}}</span>
     </a>

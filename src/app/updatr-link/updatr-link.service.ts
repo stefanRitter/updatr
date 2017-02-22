@@ -49,6 +49,18 @@ export class UpdatrLinkService {
         this.persistLinks(links);
     }
 
+    toggleReadUrl(url: string) {
+        let links = this.getData();
+
+        // find url
+        let index = this.findUrl(url, links);
+        if (index === -1) return;
+
+        // udpate & persist
+        links[index].visited = !links[index].visited;
+        this.persistLinks(links);
+    }
+
     toggleStarUrl(url: string) {
         let links = this.getData();
 
@@ -57,9 +69,9 @@ export class UpdatrLinkService {
         if (index === -1) return;
 
         // udpate & persist
-        links[index].stars = parseInt(links[index].stars,10) + 1;
-        if(links[index].stars > 2) links[index].stars = 0;
-        console.log(links[index].stars);
+        let stars = parseInt(links[index].stars, 10) + 1;
+        if (stars > 2) stars = 0;
+        links[index].stars = stars;
         this.persistLinks(links);
     }
 

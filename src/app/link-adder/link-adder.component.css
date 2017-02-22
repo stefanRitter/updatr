@@ -5,15 +5,16 @@
     border-top-left-radius: 0;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
+    border: 2px solid #f36c3d;
     overflow: hidden;
     margin: auto;
     max-width: 800px;
-    transform: translateY(-60px);
+    transform: translateY(-65px);
     transition: transform 0.1s ease-in-out;
     will-change: transform;
 }
 .link-adder.show {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }
 
 .link-adder-container {
@@ -36,6 +37,7 @@
 }
 .link-adder-container label {
     font-size: 10px;
+    font-weight: 300;
     position: absolute;
     top: 0;
     left: 0;
@@ -67,4 +69,5 @@
 }
 .link-adder-button i {
     font-size: 35px;
+    color: darkgray;
 }

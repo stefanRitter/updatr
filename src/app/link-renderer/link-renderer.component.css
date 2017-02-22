@@ -1,6 +1,6 @@
 .link-renderer {
     padding: 5px 15px 10px 15px;
-    border-bottom: 1px solid rgb(239, 234, 232);
+    border-top: 1px solid rgb(239, 234, 232);
     overflow: hidden;
     width: calc(100% - 30px);
 }
@@ -25,7 +25,7 @@
     border-bottom: 1px solid white;
 }
 .link-renderer.updated a .link-text {
-    border-bottom: 1px solid #66a866;
+    border-bottom: 2px dashed #f36c3d;
 }
 
 @media (max-width: 549px) {
@@ -38,11 +38,12 @@
     display: none;
     position: relative;
     top: 5px;
-    color: #66a866;
+    color: #f36c3d;
 }
 em, .loading-icon {
     display: inline-block;
     color: lightgray;
+    font-weight: 300;
 }
 .link-renderer.updated .update-icon {
     display: inline-block;

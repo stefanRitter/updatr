@@ -17,13 +17,12 @@ export class LinkAdderComponent implements OnInit {
 
     constructor(updatrLinkService: UpdatrLinkService) {
         this.updatrLinkService = updatrLinkService;
-        this.newLink = "http://";
     }
 
     ngOnInit() { }
 
     onSubmit() {
         this.updatrLinkService.addUrl(this.newLink);
-        this.newLink = 'http://';
+        this.newLink = '';
     }
 }

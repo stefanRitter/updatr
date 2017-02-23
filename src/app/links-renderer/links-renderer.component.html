@@ -1,1 +1,10 @@
-<links-group *ngFor="let group of linkGroups" [group]="group"></links-group>
+<div *ngIf="showEmpty" class="nolinks">
+    <h2>Welcome to <span>Updatr</span> 🤗!</h2>
+    <p>To get started let's add some links you'd like to follow using the big <strong><i class="icons">add</i> button</strong> on top.</p>
+    <p>🚀</p>
+    <p>Need inspiration? Try adding: https://medium.com/product-hunt</p>
+</div>
+
+<div *ngIf="!showEmpty">
+    <links-group *ngFor="let group of linkGroups" [group]="group"></links-group>
+</div>

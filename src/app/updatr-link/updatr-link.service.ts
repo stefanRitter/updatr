@@ -4,15 +4,20 @@ import { Headers, RequestOptions, Http } from '@angular/http';
 import { UpdatrLink } from './updatr-link';
 import { UpdatrLinkGroup } from './updatr-link-group';
 
+import { similarity } from './similarity';
+import { Batch } from './batch';
+
 
 @Injectable()
 export class UpdatrLinkService {
     private http: Http;
     private applicationRef: ApplicationRef;
+    private firstSort: boolean = true;
 
     constructor(applicationRef: ApplicationRef, http: Http) {
         this.applicationRef = applicationRef;
         this.http = http;
+        window['similarity'] = similarity;
     }
 
     addUrl(url: string) {
@@ -27,7 +32,7 @@ export class UpdatrLinkService {
         let options = new RequestOptions({ headers: headers });
         let newLink = new UpdatrLink(url);
 
-        links.push(newLink);
+        links.unshift(newLink);
         this.persistLinks(links);
 
         this.http.get(url, options)
@@ -57,7 +62,7 @@ export class UpdatrLinkService {
         if (index === -1) return;
 
         // udpate & persist
-        links[index].visited = !links[index].visited;
+        links[index].visited = true;
         this.persistLinks(links);
     }
 
@@ -89,6 +94,13 @@ export class UpdatrLinkService {
 
     getUnreadReadGroups() {
         let links = this.getData();
+        if (this.firstSort) {
+            links = links.sort(function (linkA, linkB) {
+                return parseInt(linkB.stars,10) - parseInt(linkA.stars,10);
+            });
+            localStorage['updatr_links_store'] = JSON.stringify(links);
+            this.firstSort = false;
+        }
 
         let unread = new UpdatrLinkGroup();
         unread.title = 'Unread updates';
@@ -122,8 +134,11 @@ export class UpdatrLinkService {
     private handleResponse(response, newLink) {
         if (response.status === 200) {
             newLink.loading = false;
-            if (newLink.html !== response._body) {
-                newLink.html = response._body;
+            let newHtml = response._body.split('body')[1];
+            let sim = similarity(newLink.html, newHtml)
+            console.log(sim, newLink.url);
+            if (sim < 0.9) {
+                newLink.html = newHtml;
                 newLink.updatedOn = (new Date()).toString();
                 newLink.visited = false;
             }

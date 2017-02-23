@@ -12,6 +12,7 @@ import { UpdatrLinkGroup }   from '../updatr-link/updatr-link-group';
 export class LinksRendererComponent implements OnInit, DoCheck {
     updatrLinkService: UpdatrLinkService;
     linkGroups: UpdatrLinkGroup[];
+    showEmpty:boolean = false;
 
     constructor(updatrLinkService: UpdatrLinkService) {
         this.updatrLinkService = updatrLinkService;
@@ -21,5 +22,6 @@ export class LinksRendererComponent implements OnInit, DoCheck {
 
     ngDoCheck() {
         this.linkGroups = this.updatrLinkService.getUnreadReadGroups();
+        this.showEmpty = (this.linkGroups[0].links.length === 0) && (this.linkGroups[1].links.length === 0);
     }
 }

@@ -1,0 +1,22 @@
+.nolinks {
+    text-align: center;
+    padding-top: 50px;
+}
+.nolinks h2 {
+    font-size: 26px;   
+}
+.nolinks span {
+    letter-spacing: -2px;
+}
+.nolinks p {
+    font-size: 20px;
+    margin: 15px auto;
+    max-width: 400px;
+}
+.nolinks i {
+    font-size: 35px;
+    vertical-align: middle;
+}
+.nolinks strong {
+    display: inline-block;
+}

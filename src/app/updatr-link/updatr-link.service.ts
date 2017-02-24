@@ -7,6 +7,8 @@ import { UpdatrLinkGroup } from './updatr-link-group';
 import { similarity } from './similarity';
 import { Batch } from './batch';
 
+import STORE from '../updatr-store/updatr-store';
+
 
 @Injectable()
 export class UpdatrLinkService {
@@ -37,8 +39,8 @@ export class UpdatrLinkService {
 
         this.http.get(url, options)
             .subscribe(
-                response => this.handleResponse(response, newLink),
-                error => this.handleError(error)
+                response => this.handleResponse(response, newLink, null),
+                error => this.handleError(error, null)
             );
     }
 
@@ -74,7 +76,7 @@ export class UpdatrLinkService {
         if (index === -1) return;
 
         // udpate & persist
-        let stars = parseInt(links[index].stars, 10) + 1;
+        let stars = links[index].stars + 1;
         if (stars > 2) stars = 0;
         links[index].stars = stars;
         this.persistLinks(links);
@@ -96,21 +98,19 @@ export class UpdatrLinkService {
         let links = this.getData();
         if (this.firstSort) {
             links = links.sort(function (linkA, linkB) {
-                return parseInt(linkB.stars,10) - parseInt(linkA.stars,10);
+                return linkB.stars - linkA.stars;
             });
-            localStorage['updatr_links_store'] = JSON.stringify(links);
+            STORE.persistLinks(links);
             this.firstSort = false;
         }
 
         let unread = new UpdatrLinkGroup();
-        unread.title = 'Unread updates';
         let read = new UpdatrLinkGroup();
-        read.title = 'Visited';
 
-        unread.links = links.filter(function (link: UpdatrLink) {
+        unread.links = links.filter(function (link:UpdatrLink) {
             return !link.visited;
         });
-        read.links = links.filter(function (link: UpdatrLink) {
+        read.links = links.filter(function (link:UpdatrLink) {
             return link.visited;
         });
 
@@ -118,25 +118,39 @@ export class UpdatrLinkService {
     }
 
     updateAllLinks() {
-        var links = this.getData();
+        STORE.setUpdating(true);
+
+        var links = this.getData().filter(function (link) { return link.visited; });
         var headers = new Headers({ 'Content-Type': 'application/json' });
         var options = new RequestOptions({ headers: headers });
+        var http = this.http;
+        var handleResponse = this.handleResponse;
+        var handleError = this.handleError;
+        var batch = new Batch();
+        var that = this;
 
-        links.forEach((link:UpdatrLink) => {
-            this.http.get(link.url, options)
-                .subscribe(
-                    response => this.handleResponse(response, link),
-                    error => this.handleError(error)
+        links.forEach(function(link:UpdatrLink) {
+            batch.push(function(done) {
+                http.get(link.url, options).subscribe(
+                    response => handleResponse.call(that, response, link, done),
+                    error => handleError.call(that, error, done)
                 );
+            });
         });
+
+        batch.onProgress(function (count, link) {
+            console.log('progress:', count, link.url);
+        });
+
+        batch.onEnd(function() { STORE.setUpdating(false); });
+        batch.start();
     }
 
-    private handleResponse(response, newLink) {
+    private handleResponse(response, newLink, done) {
         if (response.status === 200) {
             newLink.loading = false;
             let newHtml = response._body.split('body')[1];
             let sim = similarity(newLink.html, newHtml)
-            console.log(sim, newLink.url);
             if (sim < 0.9) {
                 newLink.html = newHtml;
                 newLink.updatedOn = (new Date()).toString();
@@ -144,23 +158,22 @@ export class UpdatrLinkService {
             }
             this.updateLink(newLink);
         } else {
-            this.handleError(response);
+            this.handleError(response, null);
         }
+        if (done) {done(newLink);}
     }
 
-    private handleError(err: Error) {
+    private handleError(err:Error, done) {
         console.error('HTTP ERROR', err);
+        if (done) {done();}
     }
 
     private getData() {
-        if (!localStorage['updatr_links_store']) {
-            localStorage['updatr_links_store'] = JSON.stringify([]);
-        }
-        return JSON.parse(localStorage['updatr_links_store']);
+        return STORE.getLinks();
     }
 
     private persistLinks(links) {
-        localStorage['updatr_links_store'] = JSON.stringify(links);
+        STORE.persistLinks(links);
         this.applicationRef.tick();
     }
 

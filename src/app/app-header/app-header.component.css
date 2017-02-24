@@ -32,7 +32,7 @@
     vertical-align: bottom;
 }
 
-.app-header-add, .app-header-update {
+.app-header-add, .app-header-update, .app-header-linebreak {
     cursor: pointer;
     font-size: 50px;
     vertical-align: middle;
@@ -49,9 +49,25 @@
     transform: rotateZ(45deg);
 }
 .app-header-update {
-    border-left: 1px solid white;
     font-size: 40px;
     vertical-align: middle;
     padding: 5px 8px;
     right: 0;
+    animation: rotating 1s linear infinite;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+.app-header-linebreak {
+    height: 100%;
+    width: 1px;
+    display: block;
+    right: 56px;
+    background: white;
+}
+@keyframes rotating {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+.app-header-update.rotate {
+    animation-play-state: running;
 }

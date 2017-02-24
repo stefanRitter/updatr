@@ -6,5 +6,18 @@
 </div>
 
 <div *ngIf="!showEmpty">
-    <links-group *ngFor="let group of linkGroups" [group]="group"></links-group>
+    <div class="card link-group">
+        <h4>Unread updates</h4>
+
+        <link-renderer *ngFor="let link of linkGroups[0].links" [link]="link"></link-renderer>
+
+        <p *ngIf="!linkGroups[0].links.length" class="link-group-empty">
+            <span>🎉</span> Congratulations! You've seen all updates...
+        </p>
+    </div>
+
+    <div class="card link-group" *ngIf="linkGroups[1].links.length">
+        <h4>Visited</h4>
+        <link-renderer *ngFor="let link of linkGroups[1].links" [link]="link"></link-renderer>
+    </div>
 </div>

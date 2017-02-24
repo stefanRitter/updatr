@@ -3,10 +3,10 @@
 
         <fieldset class="link-adder-container">
             <label for="newUrl">Add a new link</label>
-            <input [(ngModel)]='newLink' name="newURL" type="url" placeholder="http://">
+            <input [(ngModel)]='newLink' name="newURL" type="url" #urlInput>
         </fieldset>
 
-        <button type="submit" class="link-adder-button">
+        <button type="submit" class="link-adder-button" (click)="checkHttp()">
             <i class="icons">add_box</i>
         </button>
     </form>

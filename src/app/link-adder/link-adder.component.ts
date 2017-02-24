@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import { UpdatrLinkService } from '../updatr-link/updatr-link.service';
 
@@ -11,18 +11,34 @@ import { UpdatrLinkService } from '../updatr-link/updatr-link.service';
 })
 export class LinkAdderComponent implements OnInit {
     updatrLinkService: UpdatrLinkService;
-    newLink: string;
+    newLink:string = 'http://';
+    firstTime:boolean = false;
 
     @Input()  show: boolean;
+    @ViewChild('urlInput') vc;
 
     constructor(updatrLinkService: UpdatrLinkService) {
         this.updatrLinkService = updatrLinkService;
     }
 
-    ngOnInit() { }
+    ngOnInit() {}
+
+    ngDoCheck() {
+        if (this.show && this.firstTime) {
+            this.vc.nativeElement.focus();
+            this.firstTime = false;
+        }
+        if (!this.show) this.firstTime = true;
+    }
+
+    checkHttp() {
+        if (this.newLink[0] !== 'h') {
+            this.newLink = ''.concat('http://', this.newLink);
+        }
+    }
 
     onSubmit() {
         this.updatrLinkService.addUrl(this.newLink);
-        this.newLink = '';
+        this.newLink = 'http://';
     }
 }

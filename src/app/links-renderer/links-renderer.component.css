@@ -1,3 +1,34 @@
+.updating {
+    margin-top: 70px;
+}
+.updating .spinner {
+    margin: auto;
+}
+.updating p {
+    font-size: 12px;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.link-group h4 {
+    text-align: left;
+    padding: 5px 10px;
+    font-size: 18.4px;
+    font-weight: 300;
+    margin: 0;
+    background: #EFEAE8;
+}
+.link-group-empty {
+    text-align: center;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 200;
+}
+.link-group-empty span {
+    font-style: normal;
+}
+
 .nolinks {
     text-align: center;
     padding-top: 50px;
@@ -19,21 +50,4 @@
 }
 .nolinks strong {
     display: inline-block;
-}
-.link-group h4 {
-    text-align: left;
-    padding: 5px 10px;
-    font-size: 18.4px;
-    font-weight: 300;
-    margin: 0;
-    background: #EFEAE8;
-}
-.link-group-empty {
-    text-align: center;
-    font-size: 16px;
-    font-style: italic;
-    font-weight: 200;
-}
-.link-group-empty span {
-    font-style: normal;
 }

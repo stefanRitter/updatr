@@ -5,6 +5,10 @@
     <p>Need inspiration? Try adding: https://medium.com/product-hunt</p>
 </div>
 
+<div class="updating" *ngIf="updating">
+    <p>{{progressCount}} of {{linkGroups[1].links.length}} links updated...</p>
+</div>
+
 <div *ngIf="!showEmpty">
     <div class="card link-group">
         <h4>Unread updates</h4>

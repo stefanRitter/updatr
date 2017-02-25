@@ -3,6 +3,7 @@ import { UpdatrLink } from '../updatr-link/updatr-link';
 // app store
 var _updating:boolean = false;
 var _links:UpdatrLink[] = [];
+var _progressCount = 0;
 
 
 // prepare data
@@ -21,17 +22,22 @@ export default {
     setUpdating(updating:boolean) {
         _updating = updating;
     },
-
     getUpdating() {
         return _updating;
-    },
-
-    getLinks() {
-        return _links;
     },
 
     persistLinks(links) {
         _links = links;
         localStorage['updatr_links_store'] = JSON.stringify(links);
+    },
+    getLinks() {
+        return _links;
+    },
+
+    getProgressCount() {
+        return _progressCount;
+    },
+    setProgressCount(count:number) {
+        _progressCount = count;
     }
 };

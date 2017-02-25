@@ -120,7 +120,7 @@ export class UpdatrLinkService {
     updateAllLinks() {
         STORE.setUpdating(true);
 
-        var links = this.getData().filter(function (link) { return link.visited; });
+        var visitedLinks = this.getData().filter(function (link) { return link.visited; });
         var headers = new Headers({ 'Content-Type': 'application/json' });
         var options = new RequestOptions({ headers: headers });
         var http = this.http;
@@ -129,7 +129,7 @@ export class UpdatrLinkService {
         var batch = new Batch();
         var that = this;
 
-        links.forEach(function(link:UpdatrLink) {
+        visitedLinks.forEach(function(link:UpdatrLink) {
             batch.push(function(done) {
                 http.get(link.url, options).subscribe(
                     response => handleResponse.call(that, response, link, done),
@@ -140,6 +140,7 @@ export class UpdatrLinkService {
 
         batch.onProgress(function (count, link) {
             console.log('progress:', count, link.url);
+            STORE.setProgressCount(count);
         });
 
         batch.onEnd(function() { STORE.setUpdating(false); });
@@ -165,7 +166,7 @@ export class UpdatrLinkService {
 
     private handleError(err:Error, done) {
         console.error('HTTP ERROR', err);
-        if (done) {done();}
+        if (done) {done({});}
     }
 
     private getData() {

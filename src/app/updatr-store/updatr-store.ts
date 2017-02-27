@@ -3,7 +3,8 @@ import { UpdatrLink } from '../updatr-link/updatr-link';
 // app store
 var _updating:boolean = false;
 var _links:UpdatrLink[] = [];
-var _progressCount = 0;
+var _progressCount:number = 0;
+var _linksToCheck:number = 0;
 
 
 // prepare data
@@ -24,6 +25,13 @@ export default {
     },
     getUpdating() {
         return _updating;
+    },
+
+    setLinksToCheck(linksToCheck:number) {
+        _linksToCheck = linksToCheck;
+    },
+    getLinksToCheck() {
+        return _linksToCheck;
     },
 
     persistLinks(links) {

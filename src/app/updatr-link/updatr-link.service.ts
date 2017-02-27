@@ -118,8 +118,6 @@ export class UpdatrLinkService {
     }
 
     updateAllLinks() {
-        STORE.setUpdating(true);
-
         var visitedLinks = this.getData().filter(function (link) { return link.visited; });
         var headers = new Headers({ 'Content-Type': 'application/json' });
         var options = new RequestOptions({ headers: headers });
@@ -128,6 +126,9 @@ export class UpdatrLinkService {
         var handleError = this.handleError;
         var batch = new Batch();
         var that = this;
+
+        STORE.setUpdating(true);
+        STORE.setLinksToCheck(visitedLinks.length);
 
         visitedLinks.forEach(function(link:UpdatrLink) {
             batch.push(function(done) {
@@ -139,8 +140,8 @@ export class UpdatrLinkService {
         });
 
         batch.onProgress(function (count, link) {
-            console.log('progress:', count, link.url);
             STORE.setProgressCount(count);
+            that.applicationRef.tick();
         });
 
         batch.onEnd(function() { STORE.setUpdating(false); });
@@ -150,8 +151,9 @@ export class UpdatrLinkService {
     private handleResponse(response, newLink, done) {
         if (response.status === 200) {
             newLink.loading = false;
-            let newHtml = response._body.split('body')[1];
+            let newHtml = response._body.split('<body')[1];
             let sim = similarity(newLink.html, newHtml)
+            console.log('match:', newLink.url, sim);
             if (sim < 0.9) {
                 newLink.html = newHtml;
                 newLink.updatedOn = (new Date()).toString();

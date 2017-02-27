@@ -18,6 +18,7 @@ export class LinksRendererComponent implements OnInit, DoCheck {
     showEmpty:boolean = false;
     updating:boolean = false;
     progressCount:number = 0;
+    linksToCheck:number = 0;
 
     constructor(updatrLinkService: UpdatrLinkService) {
         this.updatrLinkService = updatrLinkService;
@@ -29,6 +30,7 @@ export class LinksRendererComponent implements OnInit, DoCheck {
         this.linkGroups = this.updatrLinkService.getUnreadReadGroups();
         this.showEmpty  = (this.linkGroups[0].links.length === 0) && (this.linkGroups[1].links.length === 0);
         this.updating   = STORE.getUpdating();
+        this.linksToCheck   = STORE.getLinksToCheck();
         this.progressCount = STORE.getProgressCount();
     }
 }

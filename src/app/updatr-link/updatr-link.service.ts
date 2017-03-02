@@ -129,6 +129,7 @@ export class UpdatrLinkService {
 
         STORE.setUpdating(true);
         STORE.setLinksToCheck(visitedLinks.length);
+        STORE.setProgressCount(0);
 
         visitedLinks.forEach(function(link:UpdatrLink) {
             batch.push(function(done) {

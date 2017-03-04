@@ -21,13 +21,6 @@
     float: left;
     margin: 10px 0;
 }
-.link-renderer a .link-text {
-    border-bottom: 1px solid white;
-}
-.link-renderer.updated a .link-text {
-    border-bottom: 2px dashed #f36c3d;
-}
-
 @media (max-width: 549px) {
     .link-renderer a {
         font-size: 16px;

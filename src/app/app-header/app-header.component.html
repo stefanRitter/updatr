@@ -12,3 +12,6 @@
 
     <link-adder [show]="showAdder"></link-adder>
 </header>
+
+
+<div class="app-header-background" [ngClass]="{'show': showAdder}" (click)="onAdd()"></div>

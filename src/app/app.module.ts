@@ -9,6 +9,9 @@ import { LinkAdderComponent } from './link-adder/link-adder.component';
 import { LinksRendererComponent } from './links-renderer/links-renderer.component';
 import { LinkRendererComponent } from './link-renderer/link-renderer.component';
 
+import { STORE } from './updatr-store/updatr-store';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +25,7 @@ import { LinkRendererComponent } from './link-renderer/link-renderer.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [STORE],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

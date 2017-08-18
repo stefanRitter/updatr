@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UpdatrLinkService } from '../updatr-link/updatr-link.service';
 
-import STORE from '../updatr-store/updatr-store';
+import { STORE } from '../updatr-store/updatr-store';
 
 
 @Component({
@@ -16,19 +16,21 @@ export class AppHeaderComponent implements OnInit {
     showAdder:boolean = false;
     updating:boolean = false;
     updatrLinkService: UpdatrLinkService;
+    STORE: STORE;
 
-    constructor(updatrLinkService: UpdatrLinkService) {
+    constructor(updatrLinkService: UpdatrLinkService, store:STORE) {
         this.updatrLinkService = updatrLinkService;
+        this.STORE = store;
     }
 
     ngOnInit() { }
 
     ngDoCheck() {
-        this.updating = STORE.getUpdating();
+        this.updating = this.STORE.getUpdating();
     }
 
     onUpdate() {
-        if (STORE.getUpdating()) return;
+        if (this.STORE.getUpdating()) return;
         this.updatrLinkService.updateAllLinks();
     }
 

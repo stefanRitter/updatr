@@ -32,7 +32,7 @@ export class UpdatrLinkService {
         // add & persist
         let newLink = new UpdatrLink(url);
         links.unshift(newLink);
-        this.persistLinks(links, -1);
+        this.persistLinks(links, -1, newLink);
     }
 
     removeUrl(url: string) {
@@ -43,8 +43,8 @@ export class UpdatrLinkService {
         if (index === -1) return;
 
         // remove & persist
-        links.splice(index, 1);
-        this.persistLinks(links, -1);
+        let removed = links.splice(index, 1)[0];
+        this.persistLinks(links, -1, removed);
     }
 
     toggleReadUrl(url: string) {
@@ -56,7 +56,7 @@ export class UpdatrLinkService {
 
         // udpate & persist
         links[index].visited = true;
-        this.persistLinks(links, index);
+        this.persistLinks(links, index, null);
     }
 
     toggleStarUrl(url: string) {
@@ -70,7 +70,7 @@ export class UpdatrLinkService {
         let stars = links[index].stars + 1;
         if (stars > 2) stars = 0;
         links[index].stars = stars;
-        this.persistLinks(links, index);
+        this.persistLinks(links, index, null);
     }
 
     getUnreadReadGroups() {
@@ -118,8 +118,8 @@ export class UpdatrLinkService {
         return this.STORE.getLinks();
     }
 
-    private persistLinks(links, index) {
-        this.STORE.persistLinks(links, index);
+    private persistLinks(links, index, link) {
+        this.STORE.persistLinks(links, index, link);
         this.applicationRef.tick();
     }
 

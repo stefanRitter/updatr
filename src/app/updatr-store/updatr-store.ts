@@ -59,25 +59,25 @@ export class STORE {
         return _linksToCheck;
     }
 
-    persistLinks(links, index) {
+    persistLinks(links, index, link) {
         _links = links;
         let stringified = JSON.stringify(links)
         localStorage['updatr_links_store'] = stringified;
 
-        // persist new link
+        // persist changes
         let url = environment.server + 'links';
-
         if (index > -1) {
-            let link = JSON.stringify(links[index]);
+            link = JSON.stringify(links[index]);
             this.http.patch(url, link, {withCredentials: true})
                 .subscribe(
                     response => {},
                     error => handleError(error)
                 );
         } else {
-            this.http.post(url, stringified, {withCredentials: true})
+            link = JSON.stringify(link);
+            this.http.put(url, link, {withCredentials: true})
                 .subscribe(
-                    response => handleResponse(response),
+                    response => {},
                     error => handleError(error)
                 );
         }

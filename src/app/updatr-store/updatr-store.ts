@@ -21,11 +21,18 @@ _links.forEach(function (link) {
 
 // handle http response
 function handleResponse (response:any) {
-    _links = JSON.parse(response._body);
-    localStorage['updatr_links_store'] = response._body;
+    let body = JSON.parse(response._body)
+    _links = body.links;
+    localStorage['updatr_links_store'] = JSON.stringify(_links);
+    document.cookie = 'uid='+body.uid;
 }
-function handleError (err:Error) {
-    console.error('HTTP ERROR', err);
+function handleError (err) {
+    console.log(err.status)
+    if (err.status === 403) {
+        // window.location.href = 'https://www.getupdatr.com/join';
+    } else {
+        console.error('HTTP ERROR', err);
+    }
 }
 
 // expose data access
@@ -37,7 +44,13 @@ export class STORE {
         this.http = http;
 
         // get links
-        let url = environment.server + 'links';
+        let url = environment.server;
+        if (location.pathname === '/demo') {
+            url += 'demolinks';
+        } else {
+            url += 'links';
+        }
+
         this.http.get(url, {withCredentials: true})
             .subscribe(
                 response => handleResponse(response),

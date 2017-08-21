@@ -1,3 +1,6 @@
+
+// TODO: check for updates in sync with the cronjob's schedule
+
 var domain = 'https://www.getupdatr.com';
 
 // update link count
@@ -9,9 +12,8 @@ function udpateLinkCount (uid) {
             if (xhr.status === 200) {
                 chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
                 chrome.browserAction.setBadgeText({text: xhr.response});
-            }
-            if (xhr.status === 403) {
-                window.open(domain+'/login','_blank');
+            } else {
+                chrome.browserAction.setBadgeText({text: ''});
             }
         }
     }
@@ -23,10 +25,12 @@ function udpateLinkCount (uid) {
 chrome.browserAction.onClicked.addListener(function () {
     chrome.cookies.get({url: domain, name: 'uid'}, function (cookie) {
         if (!cookie) {
-            return window.open(domain+'/login','_blank');
+            window.open(domain+'/login','_blank');
+            chrome.browserAction.setBadgeText({text: ''});
+        } else {
+            udpateLinkCount(cookie.value);
+            window.open(domain,'_blank');
         }
-        udpateLinkCount(cookie.value);
-        window.open(domain,'_blank');
     });
 });
 
@@ -34,6 +38,7 @@ chrome.browserAction.onClicked.addListener(function () {
 chrome.cookies.get({"url": domain, "name": 'uid'}, function (cookie) {
     if (!cookie) {
         window.open(domain+'/login','_blank');
+        chrome.browserAction.setBadgeText({text: ''});
     } else {
         udpateLinkCount(cookie.value);
     }

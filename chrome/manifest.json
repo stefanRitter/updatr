@@ -3,8 +3,8 @@
 
     "name": "Upadtr",
     "short_name": "Upadtr",
-    "description": "Keep up to date.",
-    "version": "0.0.1",
+    "description": "Follow Anything. Never miss new content from your favorite sites.",
+    "version": "0.0.2",
 
     "icons": {
         "16": "icon-16.png",

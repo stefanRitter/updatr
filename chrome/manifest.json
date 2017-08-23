@@ -15,6 +15,7 @@
 
     "permissions": [
         "cookies",
+        "alarms",
         "https://www.getupdatr.com/"
     ],
 

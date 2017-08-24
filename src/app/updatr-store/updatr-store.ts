@@ -24,14 +24,12 @@ function handleResponse (response:any) {
     let body = JSON.parse(response._body)
     _links = body.links;
     localStorage['updatr_links_store'] = JSON.stringify(_links);
-    if (body.uid) { document.cookie = 'uid='+body.uid; }
-}
-function handleError (err) {
-    console.log(err.status)
-    if (err.status === 403) {
-        // window.location.href = 'https://www.getupdatr.com/join';
-    } else {
-        console.error('HTTP ERROR', err);
+
+    if (body.uid) {
+        let d = new Date();
+        d.setTime(d.getTime() + (360 * 24 * 60 * 60 * 1000));
+        let expires = "expires="+d.toUTCString();
+        document.cookie = 'uid='+body.uid+';'+expires;
     }
 }
 
@@ -54,7 +52,7 @@ export class STORE {
         this.http.get(url, {withCredentials: true})
             .subscribe(
                 response => handleResponse(response),
-                error => handleError(error)
+                error => this.handleError(error)
             );
     }
 
@@ -84,19 +82,23 @@ export class STORE {
             this.http.patch(url, link, {withCredentials: true})
                 .subscribe(
                     response => {},
-                    error => handleError(error)
+                    error => this.handleError(error)
                 );
         } else {
             link = JSON.stringify(link);
             this.http.put(url, link, {withCredentials: true})
                 .subscribe(
                     response => {},
-                    error => handleError(error)
+                    error => this.handleError(error)
                 );
         }
     }
 
     getLinks() {
         return _links;
+    }
+
+    private handleError(error) {
+        console.error('HTTP ERROR', error);
     }
 };

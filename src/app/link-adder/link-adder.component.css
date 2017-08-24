@@ -1,16 +1,17 @@
 .link-adder {
-    box-shadow: 0 0 0 -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.14), 0 0 3px 0 rgba(0,0,0,.12);
     padding: 6px 15px 6px 22px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
     border: 2px solid #f36c3d;
+    border-top: 0;
     overflow: hidden;
     margin: auto;
     max-width: 800px;
-    transform: translateY(-155px);
-    transition: transform 0.2s ease-in-out;
+    height: 35px;
+    transform: translateY(-50px);
+    transition: transform 0.1s ease-in-out;
     will-change: transform;
 }
 .link-adder.show {

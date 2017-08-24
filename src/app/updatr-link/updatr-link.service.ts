@@ -13,7 +13,6 @@ import { STORE } from '../updatr-store/updatr-store';
 export class UpdatrLinkService {
     private http: Http;
     private applicationRef: ApplicationRef;
-    private firstSort: boolean = true;
     private STORE: STORE;
 
     constructor(applicationRef: ApplicationRef, http: Http, store: STORE) {
@@ -75,13 +74,6 @@ export class UpdatrLinkService {
 
     getUnreadReadGroups() {
         let links = this.getData();
-        if (this.firstSort) {
-            links = links.sort(function (linkA, linkB) {
-                return linkB.stars - linkA.stars;
-            });
-            this.firstSort = false;
-        }
-
         let unread = new UpdatrLinkGroup();
         let read = new UpdatrLinkGroup();
 

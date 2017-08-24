@@ -22,7 +22,9 @@ _links.forEach(function (link) {
 // handle http response
 function handleResponse (response:any) {
     let body = JSON.parse(response._body)
-    _links = body.links;
+    _links = body.links.sort(function (linkA, linkB) {
+        return linkB.stars - linkA.stars;
+    });
     localStorage['updatr_links_store'] = JSON.stringify(_links);
 
     if (body.uid) {

@@ -17,7 +17,6 @@ export class LinksRendererComponent implements OnInit, DoCheck {
     updatrLinkService: UpdatrLinkService;
     linkGroups: UpdatrLinkGroup[];
     showEmpty:boolean = false;
-    updating:boolean = false;
     linksToCheck:number = 0;
 
     constructor(updatrLinkService: UpdatrLinkService, store:STORE) {
@@ -30,7 +29,6 @@ export class LinksRendererComponent implements OnInit, DoCheck {
     ngDoCheck() {
         this.linkGroups = this.updatrLinkService.getUnreadReadGroups();
         this.showEmpty  = (this.linkGroups[0].links.length === 0) && (this.linkGroups[1].links.length === 0);
-        this.updating   = this.STORE.getUpdating();
         this.linksToCheck = this.STORE.getLinksToCheck();
     }
 }

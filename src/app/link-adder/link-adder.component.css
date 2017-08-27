@@ -10,12 +10,13 @@
     margin: auto;
     max-width: 800px;
     height: 35px;
-    transform: translateY(-50px);
-    transition: transform 0.1s ease-in-out;
-    will-change: transform;
+    position: relative;
+    top: -50px;
+    transition: top 0.1s ease-in-out;
+    will-change: top;
 }
 .link-adder.show {
-    transform: translateY(-2px);
+    top: 0;
 }
 
 .link-adder-container {
@@ -27,6 +28,7 @@
     float:left;
 }
 .link-adder-container input {
+    appearance: none;
     border: 0;
     border-bottom: 1px solid darkgray;
     outline: 0;

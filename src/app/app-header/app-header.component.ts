@@ -14,7 +14,6 @@ import { STORE } from '../updatr-store/updatr-store';
 
 export class AppHeaderComponent implements OnInit {
     showAdder:boolean = false;
-    updating:boolean = false;
     updatrLinkService: UpdatrLinkService;
     STORE: STORE;
 
@@ -24,15 +23,6 @@ export class AppHeaderComponent implements OnInit {
     }
 
     ngOnInit() { }
-
-    ngDoCheck() {
-        this.updating = this.STORE.getUpdating();
-    }
-
-    onUpdate() {
-        if (this.STORE.getUpdating()) return;
-        this.updatrLinkService.updateAllLinks();
-    }
 
     onAdd() {
         this.showAdder = !this.showAdder;

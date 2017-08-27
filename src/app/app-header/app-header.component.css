@@ -47,42 +47,17 @@
     vertical-align: bottom;
 }
 
-.app-header-add, .app-header-update, .app-header-linebreak {
+.app-header-add {
     cursor: pointer;
     font-size: 50px;
     vertical-align: middle;
     position: absolute;
     top: 0;
-}
-.app-header-add {
-    right: 57px;
+    right: 5px;
     padding: 0 6px;
     transition: transform 0.1s ease-in-out;
     transform: rotateZ(0);
 }
 .app-header-add.show {
     transform: rotateZ(45deg);
-}
-.app-header-update {
-    font-size: 40px;
-    vertical-align: middle;
-    padding: 5px 8px;
-    right: 0;
-    animation: rotating 1s linear infinite;
-    animation-fill-mode: forwards;
-    animation-play-state: paused;
-}
-.app-header-linebreak {
-    height: 100%;
-    width: 1px;
-    display: block;
-    right: 56px;
-    background: white;
-}
-@keyframes rotating {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
-}
-.app-header-update.rotate {
-    animation-play-state: running;
 }

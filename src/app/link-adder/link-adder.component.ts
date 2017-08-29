@@ -25,7 +25,7 @@ export class LinkAdderComponent implements OnInit {
 
     ngDoCheck() {
         if (this.show && this.firstTime) {
-            this.vc.nativeElement.focus();
+            setTimeout(() => this.vc.nativeElement.focus(), 105);
             this.firstTime = false;
         }
         if (!this.show) this.firstTime = true;

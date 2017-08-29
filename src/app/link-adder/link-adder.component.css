@@ -11,12 +11,11 @@
     max-width: 800px;
     height: 35px;
     position: relative;
-    top: -50px;
-    transition: top 0.1s ease-in-out;
-    will-change: top;
+    transition: transform 0.1s ease-in-out;
+    transform: translateY(-50px);
 }
 .link-adder.show {
-    top: 0;
+    transform: translateY(0);
 }
 
 .link-adder-container {
@@ -29,8 +28,12 @@
 }
 .link-adder-container input {
     appearance: none;
+    background: transparent;
+    border-radius: 0;
+    height: 24px;
+    padding: 0;
+    margin: 0;
     border: 0;
-    border-bottom: 1px solid darkgray;
     outline: 0;
     display: block;
     width: 100%;

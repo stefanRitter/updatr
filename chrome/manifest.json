@@ -24,6 +24,11 @@
         "persistent": false
     },
 
+    "content_scripts": [{
+        "matches": ["*://www.getupdatr.com/*"],
+        "js": ["chrome-badge.js"]
+    }],
+
     "browser_action": {
         "default_icon": "icon-128.png",
         "default_title": "Updatr"

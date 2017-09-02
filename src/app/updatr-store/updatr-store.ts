@@ -45,10 +45,10 @@ export class STORE {
 
         // get links
         let url = environment.server;
-        if (location.pathname === '/demo') {
-            url += 'demolinks';
-        } else {
+        if (location.pathname === '/') {
             url += 'links';
+        } else {
+            url += location.pathname.replace('/', '');
         }
 
         this.http.get(url, {withCredentials: true})

@@ -49,11 +49,9 @@
 
 .app-header-add {
     cursor: pointer;
-    font-size: 50px;
-    vertical-align: middle;
     position: absolute;
     top: 0;
-    right: 5px;
+    right: 0;
     padding: 0 6px;
     transition: transform 0.1s ease-in-out;
     transform: rotateZ(0);

@@ -28,16 +28,11 @@
     }
 }
 
-.loading-icon, .update-icon {
+.update-icon {
     display: none;
     position: relative;
     top: 5px;
     color: #f36c3d;
-}
-em, .loading-icon {
-    display: inline-block;
-    color: lightgray;
-    font-weight: 300;
 }
 .link-renderer.updated .update-icon {
     display: inline-block;

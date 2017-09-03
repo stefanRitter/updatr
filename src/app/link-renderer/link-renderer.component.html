@@ -1,12 +1,12 @@
 <div class="link-renderer" [ngClass]="{'updated': !link.visited }">
     <a href="{{link.url}}" (click)="onToggleRead()" target="_blank">
-        <i class="icons update-icon">new_releases</i>
+        <img src="/assets/img/update.svg" alt="update" class="update-icon"/>
         <span class="link-text">{{link.url}}</span>
     </a>
     <div class="link-renderer-buttons">
-        <i class="icons" (click)="onToggleStar()" *ngIf="link.stars==0">star_border</i>
-        <i class="icons" (click)="onToggleStar()" *ngIf="link.stars==1">star_half</i>
-        <i class="icons" (click)="onToggleStar()" *ngIf="link.stars==2">star</i>
-        <i class="icons" (click)="onDelete()" style="color:lightgray">delete</i>
+        <img src="/assets/img/star-1.svg" alt="star-1" *ngIf="link.stars==0" (click)="onToggleStar()"/>
+        <img src="/assets/img/star-2.svg" alt="star-2" *ngIf="link.stars==1" (click)="onToggleStar()"/>
+        <img src="/assets/img/star-3.svg" alt="star-3" *ngIf="link.stars==2" (click)="onToggleStar()"/>
+        <img src="/assets/img/delete.svg" alt="delete" (click)="onDelete()"/>
     </div>
 </div>
